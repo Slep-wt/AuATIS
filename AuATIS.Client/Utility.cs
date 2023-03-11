@@ -9,16 +9,22 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
+using System.Runtime;
+using System.Timers;
 
 namespace AuATIS.Client
 {
-    public static class Utility
+    public class Utility
     {
-        static readonly string ProfileDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\vatSys Files\\Profiles";
+        readonly string ProfileDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\vatSys Files\\Profiles";
+        public IDictionary<string, string> Profiles { get; }
 
-        public static readonly IDictionary<string, string> Profiles = GetProfiles();
+        public Utility()
+        {
+            Profiles = GetProfiles();
+        }
 
-        internal static Dictionary<string, string> GetProfiles()
+        internal Dictionary<string, string> GetProfiles()
         {
             Dictionary<string, string> Lookup = new Dictionary<string, string>();
             try
@@ -42,7 +48,6 @@ namespace AuATIS.Client
     {
         internal static readonly string AsmDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static readonly string StartTime = DateTime.Now.ToString("dd-MM-yyyy_hh-mm-ss"); // Generates origin timestamp
-
         public static async void LogThis(object input)  // Crappy logger I threw together in a few mins
         {
             if (Directory.Exists(AsmDir + @"\Logs"))
@@ -65,6 +70,10 @@ namespace AuATIS.Client
                 Directory.CreateDirectory(AsmDir + @"\Logs");
                 LogThis(input);
             }
+        }
+        public static async void GetUTC()
+        {
+           //DateTime.UtcNow.ToShortTimeString();
         }
     }
 }

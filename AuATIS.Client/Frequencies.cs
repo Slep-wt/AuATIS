@@ -36,7 +36,12 @@ namespace AuATIS.Client
 
         public Frequencies(string profile)
         {
-            LookupTable = GetFreqs(profile);
+            LookupTable = Initialise(profile);
+        }
+
+        public Frequencies()
+        {
+
         }
 
         public string this[string key]
@@ -47,12 +52,12 @@ namespace AuATIS.Client
             }
         }
 
-        private Dictionary<string, string> GetFreqs(string Profile)
+        public Dictionary<string, string> Initialise(string Profile)
         {
             Dictionary<string, string> TempDic = new Dictionary<string, string>();
             try
             {
-                var ATISXml = XElement.Load(Utility.Profiles[Profile] + "\\ATIS.xml");
+                var ATISXml = XElement.Load(Program.UtilityHandle.Profiles[Profile] + "\\ATIS.xml");
 
                 var Frequencies = ATISXml.Elements("Frequencies").Elements();
                 foreach (var f in Frequencies)

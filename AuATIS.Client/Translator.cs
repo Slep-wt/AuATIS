@@ -66,15 +66,19 @@ namespace AuATIS.Client
 
         public Translator(string Profile)
         {
-            LookupTable = GetTranslations(Profile);
+            LookupTable = Initialise(Profile);
         }
 
-        private Dictionary<string, Translation> GetTranslations(string Profile)
+        public Translator()
+        {
+        }
+
+        public Dictionary<string, Translation> Initialise(string Profile)
         {
             Dictionary<string, Translation> TempDic = new Dictionary<string, Translation>();
             try
             {
-                var ATISXml = XElement.Load(Utility.Profiles[Profile] + "\\ATIS.xml");
+                var ATISXml = XElement.Load(Program.UtilityHandle.Profiles[Profile] + "\\ATIS.xml");
 
                 var Translations = ATISXml.Elements("Translations").Elements();
                 foreach (var t in Translations)
