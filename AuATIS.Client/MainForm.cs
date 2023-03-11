@@ -106,5 +106,15 @@ namespace AuATIS.Client
         {
             Program.EditorWindow.Show();
         }
+
+        private void l_Editor_MouseEnter(object sender, EventArgs e)
+        {
+            l_Editor.BackColor = Color.FromArgb(130, 146, 146);
+        }
+
+        private void l_Editor_MouseLeave(object sender, EventArgs e)
+        {
+            l_Editor.BackColor = Color.FromArgb(160, 170, 170);
+        }
     }
 }

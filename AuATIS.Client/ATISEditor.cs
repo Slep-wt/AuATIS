@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace AuATIS.Client
 {
@@ -82,6 +83,10 @@ namespace AuATIS.Client
                 }
             }
             l_METAR.Text = AResult;
+
+            // Process METAR
+            
+
         }
     }
 }

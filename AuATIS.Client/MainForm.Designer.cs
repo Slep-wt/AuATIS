@@ -135,6 +135,8 @@
             l_Editor.Text = "Editor";
             l_Editor.TextAlign = ContentAlignment.MiddleCenter;
             l_Editor.MouseClick += l_Editor_MouseClick;
+            l_Editor.MouseEnter += l_Editor_MouseEnter;
+            l_Editor.MouseLeave += l_Editor_MouseLeave;
             // 
             // MainForm
             // 
