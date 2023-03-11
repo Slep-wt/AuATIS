@@ -66,14 +66,19 @@ namespace AuATIS.Client
 
         public Translator(string Profile)
         {
-            LookupTable = Initialise(Profile);
+            LookupTable = Init(Profile);
         }
 
         public Translator()
         {
         }
 
-        public Dictionary<string, Translation> Initialise(string Profile)
+        public void Initialise(string Profile)
+        {
+            LookupTable = Init(Profile);
+        } 
+
+        private Dictionary<string, Translation> Init(string Profile)
         {
             Dictionary<string, Translation> TempDic = new Dictionary<string, Translation>();
             try

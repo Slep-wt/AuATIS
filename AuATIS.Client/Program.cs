@@ -4,6 +4,7 @@ namespace AuATIS.Client
     {
         public static Frequencies FrequencyHandle;
         public static Translator TranslatorHandle;
+        public static ATISOrder ATISOrderHandle;
         public static Utility UtilityHandle;
 
         public static MainForm MainWindow;

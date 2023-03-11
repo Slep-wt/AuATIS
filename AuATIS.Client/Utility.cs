@@ -11,6 +11,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 using System.Runtime;
 using System.Timers;
+using System.Diagnostics.Eventing.Reader;
 
 namespace AuATIS.Client
 {
@@ -41,6 +42,96 @@ namespace AuATIS.Client
             }
 
             return Lookup;
+        }
+
+
+    }
+
+    public struct EditorValue
+    {
+        public string Name;
+        public string Value;
+        public bool NameIsSpoken;
+        public string InputType;
+        public bool NumbersSpokenGrouped;
+
+        public EditorValue()
+        {
+            Name = "";
+            Value = "";
+            NameIsSpoken = false;
+            InputType = ""; 
+            NumbersSpokenGrouped = true;
+        }
+    }
+
+    public class ATISOrder
+    {
+        private List<EditorValue> Order;
+        public List<EditorValue> Table { get; }
+        public ATISOrder()
+        {
+
+        }
+
+        public ATISOrder(string Profile)
+        {
+            Order = Init(Profile);
+        }
+
+        public void Initialise(string Profile)
+        {
+            Order = Init(Profile);
+        }
+
+        public List<EditorValue> Init(string Profile)
+        {
+            List<EditorValue> EVL = new List<EditorValue>();
+            try
+            {
+                var ATISXml = XElement.Load(Program.UtilityHandle.Profiles[Profile] + "\\ATIS.xml");
+
+                var Inputs = ATISXml.Elements("Editor").Elements();
+                foreach (var i in Inputs)
+                {
+                    EditorValue EV = new EditorValue();
+
+                    IEnumerable<XAttribute> Attribs = i.Attributes();
+                    foreach (var x in Attribs)
+                    {
+                        switch (x.Name.ToString())
+                        {
+                            case "name":
+                                EV.Name = x.Value;
+                                break;
+                            case "value":
+                                EV.Value = x.Value;
+                                break;
+                            case "NameIsSpoken":
+                                if (x.Value.ToString() == "true")
+                                    EV.NameIsSpoken = true;
+                                else
+                                    EV.NameIsSpoken = false;
+                                break;
+                            case "InputType":
+                                EV.InputType = x.Value;
+                                break;
+                            case "NumbersSpokenGrouped":
+                                if (x.Value.ToString() == "true")
+                                    EV.NumbersSpokenGrouped = true;
+                                else
+                                    EV.NumbersSpokenGrouped = false;
+                                break;
+                        }
+                    }
+                    EVL.Append(EV);
+                }
+            } catch (Exception e)
+            {
+                Session.LogThis("[ATISOrder.Initialise()] " + e.Message);
+                return EVL;
+            }
+            return EVL;
         }
     }
 

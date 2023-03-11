@@ -36,7 +36,7 @@ namespace AuATIS.Client
 
         public Frequencies(string profile)
         {
-            LookupTable = Initialise(profile);
+            LookupTable = Init(profile);
         }
 
         public Frequencies()
@@ -52,7 +52,12 @@ namespace AuATIS.Client
             }
         }
 
-        public Dictionary<string, string> Initialise(string Profile)
+        public void Initialise(string Profile)
+        {
+            LookupTable = Init(Profile);
+        }
+
+        private Dictionary<string, string> Init(string Profile)
         {
             Dictionary<string, string> TempDic = new Dictionary<string, string>();
             try
