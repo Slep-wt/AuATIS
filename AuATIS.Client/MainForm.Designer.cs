@@ -54,7 +54,7 @@
             TopBackground.BackColor = Color.FromArgb(160, 170, 170);
             TopBackground.Location = new Point(-1, 0);
             TopBackground.Name = "TopBackground";
-            TopBackground.Size = new Size(447, 26);
+            TopBackground.Size = new Size(452, 26);
             TopBackground.TabIndex = 3;
             // 
             // l_ProfileCurrent
@@ -83,8 +83,8 @@
             l_Settings.Text = "Settings";
             l_Settings.TextAlign = ContentAlignment.MiddleCenter;
             l_Settings.Click += l_Settings_Click;
-            l_Settings.MouseEnter += l_Settings_MouseEnter;
-            l_Settings.MouseLeave += l_Settings_MouseLeave;
+            l_Settings.MouseEnter += Taskbar_MouseEnter;
+            l_Settings.MouseLeave += Taskbar_MouseLeave;
             // 
             // l_d_Connection
             // 
@@ -101,8 +101,8 @@
             l_d_Connection.TextAlign = ContentAlignment.MiddleLeft;
             l_d_Connection.Visible = false;
             l_d_Connection.Click += l_d_Connection_Click;
-            l_d_Connection.MouseEnter += l_d_Connection_MouseEnter;
-            l_d_Connection.MouseLeave += l_d_Connection_MouseLeave;
+            l_d_Connection.MouseEnter += Taskbar_MouseEnter;
+            l_d_Connection.MouseLeave += Taskbar_MouseLeave;
             // 
             // l_d_ChangeProfile
             // 
@@ -119,8 +119,8 @@
             l_d_ChangeProfile.TextAlign = ContentAlignment.MiddleLeft;
             l_d_ChangeProfile.Visible = false;
             l_d_ChangeProfile.Click += l_d_ChangeProfile_Click;
-            l_d_ChangeProfile.MouseEnter += l_d_ChangeProfile_MouseEnter;
-            l_d_ChangeProfile.MouseLeave += l_d_ChangeProfile_MouseLeave;
+            l_d_ChangeProfile.MouseEnter += Taskbar_MouseEnter;
+            l_d_ChangeProfile.MouseLeave += Taskbar_MouseLeave;
             // 
             // l_Editor
             // 
@@ -135,8 +135,8 @@
             l_Editor.Text = "Editor";
             l_Editor.TextAlign = ContentAlignment.MiddleCenter;
             l_Editor.MouseClick += l_Editor_MouseClick;
-            l_Editor.MouseEnter += l_Editor_MouseEnter;
-            l_Editor.MouseLeave += l_Editor_MouseLeave;
+            l_Editor.MouseEnter += Taskbar_MouseEnter;
+            l_Editor.MouseLeave += Taskbar_MouseLeave;
             // 
             // MainForm
             // 
@@ -152,11 +152,12 @@
             Controls.Add(t_TimeUTC);
             Controls.Add(TopBackground);
             Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "MainForm";
             Text = "AuATIS";
             TransparencyKey = Color.Transparent;
-            Load += MainForm_Load_1;
+            FormClosing += MainForm_FormClosing;
             Click += MainForm_Click;
             ResumeLayout(false);
         }

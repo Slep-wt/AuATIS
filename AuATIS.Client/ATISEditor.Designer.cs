@@ -498,6 +498,7 @@
             Controls.Add(i_ATISFreq);
             Controls.Add(i_AirportICAO);
             Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "ATISEditor";
             Text = "ATIS Editor";
             FormClosing += ATISEditor_FormClosing;

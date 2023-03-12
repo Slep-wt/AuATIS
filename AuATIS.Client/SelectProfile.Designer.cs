@@ -47,7 +47,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(233, 307);
             Controls.Add(i_Profiles);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "SelectProfile";
             Text = "Select Profile";

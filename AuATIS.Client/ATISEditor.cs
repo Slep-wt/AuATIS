@@ -61,32 +61,20 @@ namespace AuATIS.Client
                 i_ATISFreq.Text = "";
             }
         }
-        private async Task<string> GetMETAR(string ICAO)
-        {
-            string result;
-            using (HttpClient client = new HttpClient())
-            {
-                result = await client.GetStringAsync("https://metar.vatsim.net/metar.php?id=" + ICAO);
-            }
-            return result;
-        }
 
         private async void l_GetMETAR_Click(object sender, EventArgs e)
         {
             string AResult = "No METAR";
             if (i_AirportICAO.Text.Length == 4)
             {
-                AResult = await GetMETAR(i_AirportICAO.Text);
+                AResult = await Program.ApiHandle.HttpGet(Program.ApiHandle.METARUrl + "?id=" + i_AirportICAO.Text);
                 if (AResult == "")
                 {
                     AResult = "No METAR";
                 }
             }
             l_METAR.Text = AResult;
-
             // Process METAR
-            
-
         }
     }
 }

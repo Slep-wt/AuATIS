@@ -17,15 +17,6 @@ namespace AuATIS.Client
 
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void b_ATISEditor(object sender, EventArgs e)
-        {
-            ATISEditor EditWindow = new ATISEditor();
-        }
 
         private void StartClientTimer()
         {
@@ -40,20 +31,6 @@ namespace AuATIS.Client
             t_TimeUTC.Text = DateTime.UtcNow.ToLongTimeString();
         }
 
-        private void b_AEditor_Click(object sender, EventArgs e)
-        {
-            Program.EditorWindow.Show();
-        }
-
-        private void l_Settings_MouseEnter(object sender, EventArgs e)
-        {
-            l_Settings.BackColor = Color.FromArgb(130, 146, 146);
-        }
-
-        private void l_Settings_MouseLeave(object sender, EventArgs e)
-        {
-            l_Settings.BackColor = Color.FromArgb(160, 170, 170);
-        }
 
         private void l_Settings_Click(object sender, EventArgs e)
         {
@@ -63,7 +40,7 @@ namespace AuATIS.Client
 
         private void l_d_Connection_Click(object sender, EventArgs e)
         {
-            //Program.ConnectionWindow.Show();
+            Program.ConnectionWindow.Show();
         }
 
         private void l_d_ChangeProfile_Click(object sender, EventArgs e)
@@ -77,44 +54,35 @@ namespace AuATIS.Client
             l_d_ChangeProfile.Hide();
         }
 
-        private void l_d_Connection_MouseEnter(object sender, EventArgs e)
-        {
-            l_d_Connection.BackColor = Color.FromArgb(130, 146, 146);
-        }
-
-        private void l_d_Connection_MouseLeave(object sender, EventArgs e)
-        {
-            l_d_Connection.BackColor = Color.FromArgb(160, 170, 170);
-        }
-
-        private void MainForm_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void l_d_ChangeProfile_MouseEnter(object sender, EventArgs e)
-        {
-            l_d_ChangeProfile.BackColor = Color.FromArgb(130, 146, 146);
-        }
-
-        private void l_d_ChangeProfile_MouseLeave(object sender, EventArgs e)
-        {
-            l_d_ChangeProfile.BackColor = Color.FromArgb(160, 170, 170);
-        }
-
         private void l_Editor_MouseClick(object sender, MouseEventArgs e)
         {
             Program.EditorWindow.Show();
         }
 
-        private void l_Editor_MouseEnter(object sender, EventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            l_Editor.BackColor = Color.FromArgb(130, 146, 146);
+            if (e.CloseReason == CloseReason.UserClosing /*&& Program.Variables.ATISAlive*/)
+            {
+                const string Alert = "Are you sure you want to quit?";
+                const string Title = "Close AuATIS";
+                DialogResult Res = MessageBox.Show(Alert, Title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (Res == DialogResult.Yes)
+                    Application.Exit();
+                else
+                    e.Cancel = true;
+            }
         }
 
-        private void l_Editor_MouseLeave(object sender, EventArgs e)
+        public void Taskbar_MouseEnter(object sender, EventArgs e)
         {
-            l_Editor.BackColor = Color.FromArgb(160, 170, 170);
+            Label source = (Label)sender;
+            source.BackColor = Color.FromArgb(130, 146, 146);
+        }
+
+        public void Taskbar_MouseLeave(object sender, EventArgs e)
+        {
+            Label source = (Label)sender;
+            source.BackColor = Color.FromArgb(160, 170, 170);
         }
     }
 }
