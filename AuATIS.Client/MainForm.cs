@@ -7,17 +7,20 @@ namespace AuATIS.Client
 {
     public partial class MainForm : Form
     {
-        internal System.Windows.Forms.Timer ClientTick = null;
+
+        /* ATIS Field Variables */
+
+
+        /* End ATIS Field Variables */
         public MainForm()
         {
-            StartClientTimer();
             InitializeComponent();
             string profile = Program.ConfigHandle.Config.user.profile;
             if (profile == "" || !Program.UtilityHandle.Profiles.ContainsKey(profile))
             {
                 Program.ProfileWindow.Show();
                 Program.ProfileWindow.TopMost = true;
-            } 
+            }
             else
             {
                 Program.FrequencyHandle.Initialise(profile);
@@ -25,26 +28,26 @@ namespace AuATIS.Client
                 l_ProfileCurrent.Text = profile;
                 Program.ConnectionWindow.Preload();
             }
-        }
-
-        private void StartClientTimer()
-        {
-            ClientTick = new System.Windows.Forms.Timer();
-            ClientTick.Interval = 500; // Update time in ms
-            ClientTick.Tick += new EventHandler(t_TimeUTCUpdate);
-            ClientTick.Start();
-        }
-
-        private void t_TimeUTCUpdate(object sender, EventArgs e)
-        {
-            t_TimeUTC.Text = DateTime.UtcNow.ToLongTimeString();
+            l_Atis1.Text = "New...";
         }
 
 
-        private void l_Settings_Click(object sender, EventArgs e)
+
+        private bool l_Settings_State_Clicked = false;
+        private void l_Settings_Click(object sender, MouseEventArgs e)
         {
-            l_d_Connection.Show();
-            l_d_ChangeProfile.Show();
+            if (!l_Settings_State_Clicked)
+            {
+                l_Settings_State_Clicked = true;
+                l_d_Connection.Show();
+                l_d_ChangeProfile.Show();
+            }
+            else
+            {
+                l_Settings_State_Clicked = false;
+                l_d_Connection.Hide();
+                l_d_ChangeProfile.Hide();
+            }
         }
 
         private void l_d_Connection_Click(object sender, EventArgs e)
@@ -63,9 +66,19 @@ namespace AuATIS.Client
             l_d_ChangeProfile.Hide();
         }
 
+        bool l_Editor_State_Clicked = false;
         private void l_Editor_MouseClick(object sender, MouseEventArgs e)
         {
-            Program.EditorWindow.Show();
+            if (!l_Editor_State_Clicked)
+            {
+                l_Editor_State_Clicked = true;
+                l_Atis1.Show();
+            }
+            else
+            {
+                l_Editor_State_Clicked = false;
+                l_Atis1.Hide();
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

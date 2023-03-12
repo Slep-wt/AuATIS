@@ -1,7 +1,8 @@
 using System.Net;
 using System.Runtime;
+using System.Windows.Forms;
 using Newtonsoft.Json;
-
+using System.Timers;
 
 namespace AuATIS.Client
 {
@@ -37,6 +38,7 @@ namespace AuATIS.Client
             FrequencyHandle = new Frequencies();
             TranslatorHandle = new Translator();
             ApiHandle = new Api();
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
@@ -44,7 +46,31 @@ namespace AuATIS.Client
             ConnectionWindow = new Connection();
             EditorWindow = new ATISEditor();
             MainWindow = new MainForm();
+
+            // Start Program Clock
+            Thread UTCTimer = new Thread(UTCUpdateThread);
+            UTCTimer.Start();
             Application.Run(MainWindow);
         }
+
+        // UTC Update Thread Environment
+        internal static System.Timers.Timer ClientTick = null;
+        public static void UTCUpdateThread()
+        {
+            ClientTick = new System.Timers.Timer();
+            ClientTick.Interval = 200; // Update time in ms
+            ClientTick.Elapsed += new ElapsedEventHandler(EH_TimeUTCUpdate);
+            ClientTick.Start();
+        }
+
+        private static void EH_TimeUTCUpdate(object sender, ElapsedEventArgs e)
+        {
+            string UTCLong = DateTime.UtcNow.ToLongTimeString();
+            MainWindow.t_TimeUTC.Invoke((MethodInvoker)delegate
+            {
+                MainWindow.t_TimeUTC.Text = UTCLong;
+            });
+        }
+        // End UTC Update Thread Environment
     }
 }

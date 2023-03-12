@@ -17,6 +17,9 @@ namespace AuATIS.Client
         public ATISEditor()
         {
             InitializeComponent();
+
+            c_ATISLetter.DataSource = "ABCDEFGHIJKLMNOPQRSTUVWXY".ToCharArray();
+            c_TimeCheck.DataSource = new string[] { "True", "False" };
         }
 
         private void ATISEditor_FormClosing(object sender, FormClosingEventArgs e)
@@ -28,26 +31,9 @@ namespace AuATIS.Client
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
         private void ATISEditor_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void l_TimeCheck_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void l_ATIS_AZ_Click(object sender, EventArgs e)
-        {
         }
 
         private void i_AirportICAO_TextChanged(object sender, EventArgs e)
