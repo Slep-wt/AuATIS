@@ -12,11 +12,20 @@ namespace AuATIS.Client
         {
             StartClientTimer();
             InitializeComponent();
-            Program.ProfileWindow.Show();
-            Program.ProfileWindow.TopMost = true;
-
+            string profile = Program.ConfigHandle.Config.user.profile;
+            if (profile == "" || !Program.UtilityHandle.Profiles.ContainsKey(profile))
+            {
+                Program.ProfileWindow.Show();
+                Program.ProfileWindow.TopMost = true;
+            } 
+            else
+            {
+                Program.FrequencyHandle.Initialise(profile);
+                Program.TranslatorHandle.Initialise(profile);
+                l_ProfileCurrent.Text = profile;
+                Program.ConnectionWindow.Preload();
+            }
         }
-
 
         private void StartClientTimer()
         {
@@ -67,7 +76,10 @@ namespace AuATIS.Client
                 const string Title = "Close AuATIS";
                 DialogResult Res = MessageBox.Show(Alert, Title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (Res == DialogResult.Yes)
+                {
+                    Program.ConfigHandle.SaveData();
                     Application.Exit();
+                }
                 else
                     e.Cancel = true;
             }

@@ -7,6 +7,7 @@ namespace AuATIS.Client
 {
     public static class Program
     {
+        public static SystemConfig ConfigHandle;
         public static Frequencies FrequencyHandle;
         public static Translator TranslatorHandle;
         public static ATISOrder ATISOrderHandle;
@@ -31,6 +32,7 @@ namespace AuATIS.Client
         [STAThread]
         static void Main()
         {
+            ConfigHandle = new SystemConfig();
             UtilityHandle = new Utility();
             FrequencyHandle = new Frequencies();
             TranslatorHandle = new Translator();
@@ -39,9 +41,9 @@ namespace AuATIS.Client
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             ProfileWindow = new SelectProfile();
+            ConnectionWindow = new Connection();
             EditorWindow = new ATISEditor();
             MainWindow = new MainForm();
-            ConnectionWindow = new Connection();
             Application.Run(MainWindow);
         }
     }

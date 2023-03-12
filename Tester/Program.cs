@@ -4,31 +4,23 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using AuATIS.Client;
 using System.Collections.Specialized;
+using System.Reflection.Metadata;
 
 namespace AuATIS.Tester
 {
-    class Program
+    public class Program
     {
+        public static Api ApiObject;
 
-        public static async Task<string> GetMETAR(string ICAO)
-        {
-            string result;
-            using (HttpClient client = new HttpClient())
-            {
-                result = await client.GetStringAsync("https://metar.vatsim.net/metar.php?id=" + ICAO);
-            }
-            return result;
-        }
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string Profile = "Australia";
+            ApiObject = new Api();
 
-            
+            ApiObject.GetStatus();
+
 
             //string MetarResult = GetMETAR("YMML").Result;
-
-            Console.WriteLine(MatchQNH("111300Z 23008G25KT 220V250 9999 FEW016 BKN020 M17/12 Q1014"));
             Console.ReadLine();
         }
 

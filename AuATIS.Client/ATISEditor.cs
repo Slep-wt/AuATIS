@@ -67,7 +67,7 @@ namespace AuATIS.Client
             string AResult = "No METAR";
             if (i_AirportICAO.Text.Length == 4)
             {
-                AResult = await Program.ApiHandle.HttpGet(Program.ApiHandle.METARUrl + "?id=" + i_AirportICAO.Text);
+                AResult = await Program.ApiHandle.HttpGet(Program.ApiHandle.StatusApi.metar[0] + "?id=" + i_AirportICAO.Text);
                 if (AResult == "")
                 {
                     AResult = "No METAR";

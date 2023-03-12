@@ -34,11 +34,11 @@
             l_Rating = new Label();
             l_Server = new Label();
             l_Connect = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
+            t_RealName = new TextBox();
+            t_VatsimID = new TextBox();
+            t_Password = new TextBox();
+            c_Ratings = new ComboBox();
+            c_Servers = new ComboBox();
             SuspendLayout();
             // 
             // l_RealName
@@ -109,43 +109,45 @@
             l_Connect.TabIndex = 5;
             l_Connect.Text = "Connect";
             l_Connect.TextAlign = ContentAlignment.MiddleCenter;
+            l_Connect.Click += l_Connect_Click;
             // 
-            // textBox1
+            // t_RealName
             // 
-            textBox1.Location = new Point(107, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(124, 23);
-            textBox1.TabIndex = 6;
+            t_RealName.Location = new Point(107, 4);
+            t_RealName.Name = "t_RealName";
+            t_RealName.Size = new Size(124, 23);
+            t_RealName.TabIndex = 6;
             // 
-            // textBox2
+            // t_VatsimID
             // 
-            textBox2.Location = new Point(107, 35);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(124, 23);
-            textBox2.TabIndex = 7;
+            t_VatsimID.Location = new Point(107, 35);
+            t_VatsimID.Name = "t_VatsimID";
+            t_VatsimID.Size = new Size(124, 23);
+            t_VatsimID.TabIndex = 7;
             // 
-            // textBox3
+            // t_Password
             // 
-            textBox3.Location = new Point(107, 68);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(124, 23);
-            textBox3.TabIndex = 8;
+            t_Password.Location = new Point(107, 68);
+            t_Password.Name = "t_Password";
+            t_Password.PasswordChar = '*';
+            t_Password.Size = new Size(124, 23);
+            t_Password.TabIndex = 8;
             // 
-            // comboBox1
+            // c_Ratings
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(315, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 11;
+            c_Ratings.FormattingEnabled = true;
+            c_Ratings.Location = new Point(315, 4);
+            c_Ratings.Name = "c_Ratings";
+            c_Ratings.Size = new Size(121, 23);
+            c_Ratings.TabIndex = 11;
             // 
-            // comboBox2
+            // c_Servers
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(315, 33);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 12;
+            c_Servers.FormattingEnabled = true;
+            c_Servers.Location = new Point(315, 33);
+            c_Servers.Name = "c_Servers";
+            c_Servers.Size = new Size(121, 23);
+            c_Servers.TabIndex = 12;
             // 
             // Connection
             // 
@@ -153,11 +155,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(160, 170, 170);
             ClientSize = new Size(448, 108);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(c_Servers);
+            Controls.Add(c_Ratings);
+            Controls.Add(t_Password);
+            Controls.Add(t_VatsimID);
+            Controls.Add(t_RealName);
             Controls.Add(l_Connect);
             Controls.Add(l_Server);
             Controls.Add(l_Rating);
@@ -180,10 +182,10 @@
         private Label l_Rating;
         private Label l_Server;
         public Label l_Connect;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
+        private TextBox t_RealName;
+        private TextBox t_VatsimID;
+        private TextBox t_Password;
+        private ComboBox c_Ratings;
+        private ComboBox c_Servers;
     }
 }

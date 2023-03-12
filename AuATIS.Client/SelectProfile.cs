@@ -23,6 +23,7 @@ namespace AuATIS.Client
             Program.FrequencyHandle.Initialise((string)i_Profiles.SelectedItem);
             Program.TranslatorHandle.Initialise((string)i_Profiles.SelectedItem);
             Program.MainWindow.l_ProfileCurrent.Text = (string)i_Profiles.SelectedItem;
+            Program.ConfigHandle.Config.user.profile = (string)i_Profiles.SelectedItem;
             Hide();
         }
 
